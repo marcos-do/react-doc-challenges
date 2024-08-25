@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Board from "./Board";
-import "./styles.css"
+import "./styles.css";
 
 const Game: React.FC = () => {
   const [history, setHistory] = useState([Array(9).fill(null)]);
@@ -20,6 +20,10 @@ const Game: React.FC = () => {
 
   const moves = history.map((_, move) => {
     let description;
+    if (move === history.length - 1) {
+      description = "You are at move #" + move;
+      return <li key={move}>{description}</li>;
+    }
     if (move > 0) {
       description = "Go to move #" + move;
     } else {
