@@ -5,6 +5,7 @@ import "./styles.css";
 const Game: React.FC = () => {
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
+  const [toggle, setToggle] = useState(false);
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
 
@@ -42,8 +43,16 @@ const Game: React.FC = () => {
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
       <div className="game-info">
-        <ol>{moves}</ol>
+        <ol>{toggle ? moves.reverse() : moves}</ol>
       </div>
+      <button
+        onClick={() => {
+          setToggle(!toggle);
+        }}
+        className="toggle"
+      >
+        Toggle moves
+      </button>
     </div>
   );
 };
